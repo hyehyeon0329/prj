@@ -1,0 +1,15 @@
+table.table.table-hover
+  if currentUser && event.author.id == currentUser.id
+    thead
+      tr
+        th Name
+        th Email
+        th Registered At
+        th
+    tbody
+      each register in registers
+        tr
+          td
+            a(href=`/users/${register.author.id}`)= register.author.name
+          td= register.author.email
+          td= moment(register.createdAt).format('YYYY-MM-DD HH:mm:ss')

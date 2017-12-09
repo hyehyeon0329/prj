@@ -1,0 +1,98 @@
+.form-group
+  label(for="title") Event Title
+  input.form-control(type="text", name="title", placeholder="What's your event?", value=event.title)
+//- 장소
+.form-group
+  label(for="location") Location 
+  input.form-control(type="text", name="location", placeholder="Where?", value=event.location)
+//- 시작 시간 종료 시간
+.row
+  .col
+    .form-group
+      label(for="location") Starts
+      input.form-control(type="date", name="starts", value=event.starts)
+  .col
+    .form-group
+      label(for="location") Ends
+      input.form-control(type="date", name="ends", value=event.ends)
+.form-group
+  label(for="event") Event
+  textarea.form-control(name="content", rows="5")= event.content
+//- 등록 조직 이름
+.form-group
+  label(for="organizer") Organizer Name
+  input.form-control(type="text", name="organizer", placeholder="Organizer", value=event.organizer)
+//- 등록 조직 설명
+.form-group
+  label(for="organizerdes") Organizer Description
+  textarea.form-control(name="organizerdes", row="5")= event.organizerdes
+.form-group
+  label(for="tags") Tags
+  input.form-control(type="text", name="tags", placeholder="tags separated by spaces", value=event.tags ? event.tags.join(" ") : "")
+//- 이벤트 종류
+.form-group
+  label(for="type", name="eventtype") Event type 
+  select.form-control(name='eventType')
+    option Select the type of event 
+    option Appearance or Singing
+    option Attraction
+    option Camp, Trip, or Retreat
+    option Class, Training, or Workshop
+    option Concert or Performance
+    option Conference
+    option Convention
+    option Dinner or Gala
+    option Festival or Fair
+    option Game or Competition
+    option Metting or Networking Evnet
+    option Other
+    option Party or Social Gathering
+    option Race or Endurance Event
+    option Rally
+    option Screening
+    option Seminar or Talk
+    option Tour
+    option Tournament
+    option Tradeshow, Consumer Show, or Expo
+//- 이벤트 분야
+.form-group
+  label(for="topic", name="eventtopic") Event topic 
+  select.form-control(name='topic')
+    option Select a topic
+    option Auto, Boat & Air
+    option Business & Professional
+    option Charity & Causes
+    option Community & Culture
+    option Family & Education
+    option Fashion & Beauty 
+    option Film, Media & Entertainment
+    option Fook & Drink
+    option Government & Politics
+    option Health & Wellness
+    option Hobbies & Special Interest
+    option Home & Lifestyle
+    option Music
+    option Other
+    option Performing & Visual Arts
+    option Religion & Spirituality
+    option School Activities
+    option Science & Technology
+    option Seasonal & Holiday
+    option Sports & Fitness
+    option Travel & Outdoor
+
+//- 무료행사 유료행사
+.form-group
+  label(for="ticket", name="eventticket") Event Tickets 
+  select.form-control(name='ticket')
+    option Select a ticket
+    option Free Ticket
+    option Paid Ticket
+
+//- 유료행사면 티켓 가격 입력
+.form-group
+  label(for="price") Price
+  .input-group
+    span.input-group-addon $
+    input.form-control(type="double" name ="price" placeholder = "15.00(Please do not enter if the price is free)", vlaue=event.price)
+

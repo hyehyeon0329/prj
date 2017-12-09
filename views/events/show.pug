@@ -1,0 +1,81 @@
+extends ../layout
+
+block content
+  .container
+    h1.main-title= event.title
+
+    .event.show
+      dl.row 
+        dt.col-sm-3 Event
+        dd.col-sm-9= event.title
+        
+        dt.col-sm-3 Loacation
+        dd.col-sm-9= event.location 
+        
+        dt.col-sm-3 Starts
+        dd.col-sm-9= event.starts
+
+        dt.col-sm-3 Ends 
+        dd.col-sm-9= event.ends
+        
+        dt.col-sm-3 Content
+        dd.col-sm-9= event.content
+        
+        dt.col-sm-3 Organizer
+        dd.col-sm-9= event.organizer
+        
+        dt.col-sm-3 Organizer Dscription
+        dd.col-sm-9= event.organizerdes
+        
+        dt.col-sm-3 Event type
+        dd.col-sm-9= event.eventType
+
+        dt.col-sm-3 Event topic
+        dd.col-sm-9= event.topic
+
+        dt.col-sm-3 Ticket
+        dd.col-sm-9= event.ticket
+
+        dt.col-sm-3 Price
+        dd.col-sm-9= event.price
+
+        dt.col-sm-3 Created At
+        dd.col-sm-9= event.createdAt
+
+      include _event
+      
+      .buttons
+        button.btn.btn-primary #[i.fa.fa-thumbs-up] Like
+        a.btn.btn-outline-primary(href='/events/') List
+
+        if currentUser
+          if event.author && event.author.id == currentUser.id
+            | 
+            a.btn.btn-outline-secondary(href=`/events/${event.id}/edit`) Edit
+            | 
+            a.btn.btn-outline-danger.need-confirm-btn(href=`/events/${event.id}?_method=delete`) Delete
+      
+      if event.numRegisters > 0
+        hr
+        h3 #{event.numRegisters} Register(s)
+        .registers.show
+          //- each answer in answers
+          include _register
+
+      form(action=`/events/${event.id}/registers`, method='POST')
+        button.btn.btn-primary(type="submit") #[i.fa.fa-plus] Register
+          
+
+    //- if currentUser
+    //-   form(action=`/events/${event.id}/register`, method='POST')
+    //-     .form-group
+    //-       label(for='answer') Your Answer
+    //-       .form-group
+    //-         input.form-control(name="name")
+    //-         input.form-control(name="email")
+
+          //- textarea.form-control(name="content", rows="5")
+        button.btn.btn-primary(type="submit") Post Your Answer
+
+
+  //- script(src='/javascripts/event_client.js')

@@ -1,0 +1,47 @@
+extends ../layout
+
+include ../includes/_paginate
+
+block content
+  .container
+    form.form-inline.search-input-group(action='/events', method='GET')
+      i.fa.fa-search
+      input.form-control.mr-sm-2(type='text', name='term', placeholder='Search', aria-label='Search', value=term)
+
+    h1.main-title 
+      | Events
+      if events.total > 0
+        .small Total #{events.total} event(s)
+
+    if events.total <= 0 
+      .alert.alert-info No events available yet
+    else
+      table.table.table-hover
+        thead
+          tr
+            td Event
+            td Starts
+            td Ends
+            td Organizer
+            td Created By
+          tbody
+            each event in events.docs
+              tr
+                td
+                  .event
+                    a(href=`/events/${event._id}`)= event.title
+                  td= event.starts
+                  td= event.ends
+                  th= event.organizer
+                  th= event.author.name
+                  td
+                    if currentUser && event.author.id == currentUser.id
+                      |
+                      a.btn.btn-sm.btn-outline-secondary(href=`/events/$}event._id}/edit`)
+                        | #[i.fa.fa-pencil] Edit
+                      |
+                      a.btn.btn-sm.need-confirm-btn.btn-outline-danger(href=`/events/${event._id}?_method=DELETE`)
+                        | #[i.fa.fa-trash] Delete
+
+    hr
+    a.btn.btn-primary(href='/events/new') Create event
